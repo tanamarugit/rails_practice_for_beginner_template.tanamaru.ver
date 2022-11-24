@@ -1,0 +1,28 @@
+ユーザー新規作成画面
+
+<div class="container">
+  <%= form_with model: @user  do |f| %>
+    
+    <div>
+      <%= f.label :name, "name" %>
+      <%= f.text_field :name, class: 'form-control'%>
+    </div>
+    <br>
+    <div>
+      <%= f.label :email, "email" %>
+      <%= f.email_field :email %>
+    </div>
+    <br>
+    <div>
+      <%= f.label :password, "password" %>
+      <%= f.password_field :password %>
+    </div>
+    <br>
+    <div>
+      <%= f.label :password_confirm, "password_confirm" %>
+      <%= f.password_field :password_confirm %>
+    </div>
+    <br>
+    <div><%= f.submit "Submit", disable_with: 'Submiting...', class: 'btn btn-primary' %></div>
+  <% end %>
+</div>

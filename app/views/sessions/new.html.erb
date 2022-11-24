@@ -1,0 +1,25 @@
+<h1>ログイン画面</h1>
+
+<%= form_with url:login_path, local: true do |f| %>
+  <div>
+      <%= f.label :name, "name" %>
+      <%= f.text_field :name, class: 'form-control'%>
+    </div>
+    <br>
+    <div>
+      <%= f.label :email, "email" %>
+      <%= f.email_field :email %>
+    </div>
+    <br>
+    <div>
+      <%= f.label :password, "password" %>
+      <%= f.password_field :password %>
+    </div>
+    <br>
+    <div>
+      <%= f.label :password_confirm, "password_confirm" %>
+      <%= f.password_field :password_confirm %>
+    </div>
+    <br>
+    <div><%= f.submit "Log in", disable_with: 'Log in...', class: 'btn btn-primary' %></div>
+<% end %>
