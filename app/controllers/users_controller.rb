@@ -8,7 +8,8 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to new_user_path, notice: "ユーザー「#{@user.name}を登録しました。」"
     else
-      render :new
+      flash.now[:alert] = "ユーザー#{@user.name}の新規作成に失敗しました。"
+      render :action => :new
     end
   end
 
