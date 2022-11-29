@@ -1,0 +1,22 @@
+質問内容、回答画面
+<p>質問タイトル<%= @question.title %></p>
+<p>質問内容<%= @question.body %></p>
+<p>質問者:<%= @question.user.name %>さん</p>
+
+<h2>回答</h2>
+<%= form_with(model: [@question, @answer], local: true) do |f| %>
+  <%= f.label :body, "回答" %>
+  <%= f.text_area :body %>
+  <%= f.submit "Submit", disable_with: 'Submiting...' %>
+<% end %>
+
+
+<div>
+  <% @question.answers.each do |answer| %>
+    <ul>
+      <li>
+        <p><%= answer.body %></p>
+      </li>
+    </ul>
+  <% end %>
+</div>

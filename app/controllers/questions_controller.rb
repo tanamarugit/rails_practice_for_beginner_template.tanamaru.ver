@@ -1,6 +1,8 @@
 class QuestionsController < ApplicationController
   def index
     @questions = Question.all
+    @q = Question.ransack(params[:q])
+    @questions = @q.result(distinct: true)
   end
 
   def new
@@ -12,9 +14,14 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to questions_path, notice: '質問を作成しました。'
     else
-      flash.now[:alert] = "ユーザー#質問の新規作成に失敗しました。"
+      flash.now[:alert] = "質問の作成に失敗しました。"
       render :action => :new
     end
+  end
+
+  def show
+    @question = Question.find(params[:id])
+    @answer = Answer.new
   end
 
   private
