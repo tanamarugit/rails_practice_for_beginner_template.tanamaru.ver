@@ -33,7 +33,12 @@
           <% end %>
         </li>
         <li>
-          <p>ログイン中のユーザー<%= current_user.name %>さん</p>
+          <% if current_user %>
+            <p>ログイン中のユーザー<%= current_user.name %>さん</p>
+          <% end %>
+        </li>
+        <li>
+          <a class="nav-link active" aria-current="page" href="/questions/new">質問新規作成</a>
         </li>
       </ul>
     </div>

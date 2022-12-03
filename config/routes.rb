@@ -6,5 +6,20 @@ Rails.application.routes.draw do
   resources :questions do
     resources :answers, only: [:create]
   end
+
+  resources :questions do 
+    collection do
+      get :solved
+      get :unsolved
+    end
+
+    member do
+      post :solve
+    end
+
+    resources :answers, only: [:create, :destroy]
+  end
+
+
   resources :users
 end
