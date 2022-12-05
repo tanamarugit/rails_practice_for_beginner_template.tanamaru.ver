@@ -38,6 +38,12 @@ class QuestionsController < ApplicationController
       render :edit
     end
   end
+  
+  def destroy
+    @question = Question.find(params[:id])
+    @question.destroy
+    redirect_to questions_path flash[:notice] = '質問を削除しました。'
+  end
 
   def solved
     @questions = Question.where(solved_check: true)
