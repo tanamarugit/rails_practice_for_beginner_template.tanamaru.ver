@@ -1,1 +1,4 @@
 <li><%= user.name %></li>
+<td>
+  <%= link_to "削除", "/users/#{user.id}", method: :delete, data: { confirm: '削除しますか?' }, class: 'btn btn-danger' %>
+</td>

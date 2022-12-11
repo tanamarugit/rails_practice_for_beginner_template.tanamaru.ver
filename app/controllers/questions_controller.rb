@@ -20,11 +20,11 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    @question = Question.find(params[:id])
+    @question = current_user.questions
   end
 
   def update
-    @question = Question.find(params[:id])
+    @question = current_user.questions
     if @question.update(question_params)
       flash[:notice] = '質問を更新しました。'
       render :edit
@@ -35,9 +35,15 @@ class QuestionsController < ApplicationController
   end
   
   def destroy
-    @question = Question.find(params[:id])
-    @question.destroy
-    redirect_to questions_path flash[:notice] = '質問を削除しました。'
+    @q = Question.ransack(params[:q])
+    @questions = @q.result(distinct: true)
+    if @question == current_user.questions
+      @question.destroy
+      redirect_to questions_path flash[:notice] = '質問を削除しました。'
+    else
+      flash.now[:danger] = 'ユーザー本人ではないため、質問の削除に失敗しました。'
+      render :index
+    end
   end
   
   def solved
