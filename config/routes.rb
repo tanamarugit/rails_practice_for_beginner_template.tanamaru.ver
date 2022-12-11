@@ -3,9 +3,6 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   
-  resources :questions do
-    resources :answers, only: [:create]
-  end
 
   resources :questions do 
     collection do

@@ -19,11 +19,6 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def show
-    @question = Question.find(params[:id])
-    @answer = Answer.new
-  end
-
   def edit
     @question = Question.find(params[:id])
   end
@@ -44,13 +39,17 @@ class QuestionsController < ApplicationController
     @question.destroy
     redirect_to questions_path flash[:notice] = '質問を削除しました。'
   end
-
+  
   def solved
+    @q = Question.ransack(params[:q])
+    @questions = @q.result(distinct: true)
     @questions = Question.where(solved_check: true)
     render :index
   end
 
   def unsolved
+    @q = Question.ransack(params[:q])
+    @questions = @q.result(distinct: true)
     @questions = Question.where(solved_check: false)
     render :index
   end
@@ -59,6 +58,11 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @question.update!(solved_check: true)
     redirect_to question_path(@question), notice: '解決済みにしました。'
+  end
+
+  def show
+    @question = Question.find(params[:id])
+    @answer = Answer.new
   end
 
   private

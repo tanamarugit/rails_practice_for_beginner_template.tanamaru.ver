@@ -1,9 +1,13 @@
 <h1>質問一覧画面</h1>
+
+<%= link_to  "全て", questions_path %>
+<%= link_to  "解決済み", solved_questions_path %>
+<%= link_to "未解決", unsolved_questions_path %>
+
 <%= search_form_for @q do |f| %>
 
   <%= f.label :title_or_body, '検索ワード' %>
   <%= f.search_field :title_or_body_cont %>
-
   <%= f.submit %>
 <% end %>
 
