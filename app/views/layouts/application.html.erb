@@ -40,7 +40,14 @@
           <% end %>
         </li>
         <li>
-          <a class="nav-link active" aria-current="page" href="/questions/new">質問新規作成</a>
+          <% if current_user %>
+            <a class="nav-link active" aria-current="page" href="/questions/new">質問新規作成</a>
+          <% end %>
+        </li>
+        <li>
+          <% if current_user == nil %>
+            <a class="nav-link active" aria-current="page" href="/users/new">ユーザー新規作成</a>
+          <% end %>
         </li>
       </ul>
     </div>

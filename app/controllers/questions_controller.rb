@@ -20,16 +20,17 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    @question = current_user.questions
+    @question = Question.find(params[:id])
   end
 
   def update
-    @question = current_user.questions
-    if @question.update(question_params)
+    @question = current_user.questions.find(params[:id])
+    if @question.user_id == current_user.id
+      @question.update(question_params)
       flash[:notice] = '質問を更新しました。'
       render :edit
     else
-      flash.now[:danger] = '失敗しました。'
+      flash.now[:danger] = 'ユーザー本人ではないため質問の更新に失敗しました。'
       render :edit
     end
   end

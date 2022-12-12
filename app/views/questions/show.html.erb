@@ -10,7 +10,9 @@
   <%= f.submit "Submit", disable_with: 'Submiting...' %>
 <% end %>
 
-<%= link_to '編集', edit_question_path %>
+<% if @question.user_id == current_user.id %>
+  <%= link_to '編集', edit_question_path %>
+<% end %>
 
 
 <div>

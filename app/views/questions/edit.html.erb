@@ -1,7 +1,6 @@
 質問編集画面
-<div>編集中の質問は&emsp;<%= @question.title %>&emsp;です</div>
 
-<%= form_with model: @question do |f| %>
+<%= form_with(model: @question) do |f| %>
   <div>
     <%= f.label :title, 'title' %>
     <%= f.text_field :title, class: 'form-control' %>
