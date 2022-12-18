@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       redirect_to new_user_path, notice: "ユーザー「#{@user.name}]を登録しました。"
     else
       flash.now[:alert] = "ユーザー#{@user.name}の新規作成に失敗しました。"
-      render :action => :new
+      render users_path
     end
   end
 
@@ -19,9 +19,10 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    session[:user_id] = nil
-    @user.destroy!
-    redirect_to new_user_path flash[:notice] = 'ユーザーを削除しました。'
+    if @user == current_user
+      @user.destroy!
+      redirect_to questions_path, notice: "ユーザー「#{@user.name}」を削除しました。"
+    end
   end
 
   private

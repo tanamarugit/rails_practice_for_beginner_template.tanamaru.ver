@@ -4,11 +4,11 @@ class AnswersController < ApplicationController
     @answer.user_id = current_user.id
     @answer.question_id = params[:question_id]
     if @answer.save
-      redirect_to ("/questions/#{params[:question_id]}"), notice: '回答しました。'
+      redirect_to question_path(params[:question_id])	, notice: '回答しました。'
     else
       @question = Question.find(params[:question_id])
       flash.now[:alert] = "回答に失敗しました。"
-      render "questions/show"
+      render question_path(params[:question_id])
     end
   end
 
