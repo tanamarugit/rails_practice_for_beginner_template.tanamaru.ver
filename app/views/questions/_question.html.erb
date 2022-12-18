@@ -1,0 +1,13 @@
+<li><%= link_to question.title, question %></li>
+<td>
+  <% if question.user == current_user  %>
+    <%= link_to "削除", "/questions/#{question.id}", method: :delete, data: { confirm: '削除しますか?' }, class: 'btn btn-danger' %>
+  <% end %> 
+</td>
+<td>
+  <% if question.solved_check? %>
+    解決済み
+  <% else %>
+    未解決
+  <% end %>
+</td>
